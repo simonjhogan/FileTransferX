@@ -1,0 +1,17 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "../../../../../Downloads/HPCMAttachmentsService.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "messageContract": true,
+    "namespaceMappings": [
+        "*, TRIMServiceReference"
+    ],
+    "targetFramework": "netcoreapp3.1",
+    "typeReuseMode": "None"
+  }
+}
