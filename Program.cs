@@ -61,7 +61,7 @@ namespace FileTransfer
             var queryArgument = new Argument<string>(
                 name: "query",
                 description: "Connection query string for the connector used.",
-                getDefaultValue: () => "HOST:https://aucomsithari.sharepoint.com;USER:simon@aucomsithari.onmicrosoft.com;PASS:2liveis2die))");
+                getDefaultValue: () => "");
 
             rootCommand.Add(connectionArgument);
             rootCommand.Add(actionArgument);
