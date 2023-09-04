@@ -21,7 +21,7 @@ namespace FileTransfer
 
             var delayOption = new Option<int>(
                 name: "--delay",
-                description: "Delay between push requests in seconds.",
+                description: "Delay between replay requests in seconds.",
                 getDefaultValue: () => 5);
                 rootCommand.AddGlobalOption(delayOption);
 
@@ -40,13 +40,13 @@ namespace FileTransfer
             var logLevelOption = new Option<int>(
                 name: "--logging",
                 description: "Logging level for the process.",
-                getDefaultValue: () => 2);
+                getDefaultValue: () => 1);
                 rootCommand.AddGlobalOption(logLevelOption);
 
             var connectionArgument = new Argument<string>
                 (name: "connection",
                 description: "The connection type to use (file, trim).",
-                getDefaultValue: () => "file"
+                getDefaultValue: () => "trim"
                 );
 
             var actionArgument = new Argument<string>
@@ -57,13 +57,13 @@ namespace FileTransfer
             var pathArgument= new Argument<string>(
                 name: "path",
                 description: "The directory to be processed.",
-                getDefaultValue: () => "c:/temp"
+                getDefaultValue: () => "c:/temp2"
                 );
 
             var queryArgument = new Argument<string>(
                 name: "query",
                 description: "Connection query string for the connector used.",
-                getDefaultValue: () => "c:/temp2"
+                getDefaultValue: () => "WorkgroupServerName/Id/Container/ContainerType/RecordType"
                 );
 
             rootCommand.Add(connectionArgument);
