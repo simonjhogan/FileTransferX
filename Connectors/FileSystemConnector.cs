@@ -8,11 +8,11 @@ namespace FileTransfer.Connectors
 {
     internal class FileSystemConnector : Connector
     {
-        public override bool Push(FileInfo file)
+        public override bool Push()
         {
             try
             {
-                log.WriteLine("Push:" + file.FullName);
+                log.WriteLine("Push:" + this.Configuration.FromPath + " => " + this.Configuration.ToPath);
                 File.Move(this.Configuration.FromPath, this.Configuration.ToPath);
             } 
             catch (Exception ex)
@@ -27,7 +27,7 @@ namespace FileTransfer.Connectors
         {
             try
             {
-                log.WriteLine("Push: " + fromPath); 
+                log.WriteLine("Push: " + fromPath + " => " + toPath); 
                 File.Move(fromPath, toPath);
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace FileTransfer.Connectors
         {
             try
             {
-                log.WriteLine("Push: " + file.FullName); 
+                log.WriteLine("Push: " + file.FullName + " => " + toPath); 
                 File.Move(file.FullName, toPath + "/" + file.Name);
             }
             catch (Exception ex)

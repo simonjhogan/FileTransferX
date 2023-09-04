@@ -16,6 +16,7 @@ namespace FileTransfer
         public bool Interactive { get; set; }
         public string Query { get; set; }
         public bool Recurisve { get; set; }
+        public String Prefix { get; set; }
         public bool Username { get; set; }
         public bool Password{ get; set; }
 
@@ -32,6 +33,7 @@ namespace FileTransfer
                 "Interactive:\t" + this.Interactive.ToString() + "\n" +
                 "Query:\t" + this.Query + "\n" +
                 "Recursive:\t" + this.Recurisve.ToString() + "\n" +
+                "Prefix:\t" + this.Prefix.ToString() + "\n" +
                 "--------------------------------------\n";
         }
     }

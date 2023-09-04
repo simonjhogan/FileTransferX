@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.ComponentModel;
 using System.Configuration;
+using TRIM.SDK;
 
 namespace FileTransfer
 {
@@ -11,9 +12,10 @@ namespace FileTransfer
     {
         public String LockFilePath { get; }
 
+        [Obsolete]
         public TaskLocker(String lockFilePath)
         {
-            this.LockFilePath = lockFilePath + "/" + ".xft_" + ".lock";   
+            this.LockFilePath = lockFilePath + "/.xft_.lock";   
         }
 
         public bool IsLocked()

@@ -17,19 +17,19 @@ namespace FileTransfer
     {
         static async Task Main(string[] args)
         { 
-            var rootCommand = new RootCommand("eft - Extreme File Transfer");
+            var rootCommand = new RootCommand("xft - Extreme File Transfer");
 
             var delayOption = new Option<int>(
                 name: "--delay",
                 description: "Delay between push requests in seconds.",
-                getDefaultValue: () => 2);
-            rootCommand.AddGlobalOption(delayOption);
+                getDefaultValue: () => 5);
+                rootCommand.AddGlobalOption(delayOption);
 
             var replayOption = new Option<int>(
                 name: "--replay",
                 description: "Number of replays to attempt.",
                 getDefaultValue: () => 3);
-            rootCommand.AddGlobalOption(replayOption);
+                rootCommand.AddGlobalOption(replayOption);
 
             var recurseOption = new Option<bool>(
                 name: "--recursive",
@@ -45,8 +45,9 @@ namespace FileTransfer
 
             var connectionArgument = new Argument<string>
                 (name: "connection",
-                description: "The connection type to use (file, sftp).",
-                getDefaultValue: () => "sharepoint");
+                description: "The connection type to use (file, trim).",
+                getDefaultValue: () => "file"
+                );
 
             var actionArgument = new Argument<string>
                 (name: "action",
@@ -56,12 +57,14 @@ namespace FileTransfer
             var pathArgument= new Argument<string>(
                 name: "path",
                 description: "The directory to be processed.",
-                getDefaultValue: () => "c:/temp");
+                getDefaultValue: () => "c:/temp"
+                );
 
             var queryArgument = new Argument<string>(
                 name: "query",
                 description: "Connection query string for the connector used.",
-                getDefaultValue: () => "");
+                getDefaultValue: () => "c:/temp2"
+                );
 
             rootCommand.Add(connectionArgument);
             rootCommand.Add(actionArgument);
@@ -82,7 +85,8 @@ namespace FileTransfer
                     LogLevel = logOpt,
                     Interactive = false,
                     Query = "*.*",
-                    Recurisve = recurseOpt
+                    Recurisve = recurseOpt,
+                    Prefix = ".xft_"
                 };
 
                 if (Path.HasExtension(pathArg))
@@ -128,18 +132,6 @@ namespace FileTransfer
                     connector = new TrimConnector();
                     break;
 
-                case "sharepoint":
-                    connector = new SharePointConnector();
-                    break;
-
-                case "directus":
-                    connector = new DirectusConnector();
-                    break;
-
-                case "sftp":
-                    connector = new SftpConnector();
-                    break;
-
                 default:
                     break;
             }
@@ -162,6 +154,8 @@ namespace FileTransfer
             {
                 if (!file.Name.StartsWith(".xft_") & !file.Directory.Name.StartsWith(".xft_"))
                 {
+                    //Thread.Sleep(1000 * configuration.Delay);
+
                     switch (configuration.Action.ToLower())
                     {
                         case "push":
@@ -173,11 +167,11 @@ namespace FileTransfer
                             }
                             if (replayCounter == configuration.ReplayCount)
                             {
-                                if (!directoryService.Exists(file.DirectoryName + "/.xft_error_que"))
+                                if (!directoryService.Exists(file.DirectoryName + "/" + ".xft_" + "error_que"))
                                 {
-                                    directoryService.Create(file.DirectoryName + "/.xft_error_que");
+                                    directoryService.Create(file.DirectoryName + "/" + ".xft_" + "error_que");
                                 }
-                                file.MoveTo(file.DirectoryName + "/.xft_error_que/" + file.Name);
+                                file.MoveTo(file.DirectoryName + "/" + ".xft_" + "error_que/" + file.Name);
                             }
                             replayCounter = 0;
                             break;

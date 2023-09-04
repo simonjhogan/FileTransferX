@@ -16,7 +16,7 @@ namespace FileTransfer.Connectors
             this.Configuration = configuration;
         }
 
-        public virtual bool Push(FileInfo file)
+        public virtual bool Push()
         {
             return true;
         }
