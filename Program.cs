@@ -20,6 +20,7 @@ namespace FileTransfer
         const bool RECURSE = false;
         const int LOG_LEVEL = 1;
         const string ACTION = "push";
+        const string PREFIX = ".xft_";
 
         static async Task Main(string[] args)
         { 
@@ -92,7 +93,7 @@ namespace FileTransfer
                     Interactive = false,
                     Query = "*.*",
                     Recurisve = recurseOpt,
-                    Prefix = ".xft_"
+                    Prefix = PREFIX
                 };
 
                 if (Path.HasExtension(pathArg))
@@ -111,7 +112,7 @@ namespace FileTransfer
         static public void ProcessFiles(Configuration configuration)
         {
             Logging log = new();
-            TaskLocker locker = new(configuration.FromPath);
+            TaskLocker locker = new(configuration.FromPath, PREFIX);
             //Encoder encoder = new Encoder();
             DirectoryService directoryService = new();
             int replayCounter = 0;
@@ -154,7 +155,7 @@ namespace FileTransfer
 
             foreach (FileInfo file in files)
             {
-                if (!file.Name.StartsWith(".xft_") & !file.Directory.Name.StartsWith(".xft_"))
+                if (!file.Name.StartsWith(PREFIX) & !file.Directory.Name.StartsWith(PREFIX))
                 {
                     //Thread.Sleep(1000 * configuration.Delay);
 
@@ -169,11 +170,11 @@ namespace FileTransfer
                             }
                             if (replayCounter == configuration.ReplayCount)
                             {
-                                if (!directoryService.Exists(file.DirectoryName + "/" + ".xft_" + "error_que"))
+                                if (!directoryService.Exists(file.DirectoryName + "/" + PREFIX + "error_que"))
                                 {
-                                    directoryService.Create(file.DirectoryName + "/" + ".xft_" + "error_que");
+                                    directoryService.Create(file.DirectoryName + "/" + PREFIX + "error_que");
                                 }
-                                file.MoveTo(file.DirectoryName + "/" + ".xft_" + "error_que/" + file.Name);
+                                file.MoveTo(file.DirectoryName + "/" + PREFIX + "error_que/" + file.Name);
                             }
                             replayCounter = 0;
                             break;

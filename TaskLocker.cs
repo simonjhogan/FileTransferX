@@ -12,9 +12,9 @@ namespace FileTransfer
     {
         public String LockFilePath { get; }
 
-        public TaskLocker(String lockFilePath)
+        public TaskLocker(String lockFilePath, string prefix)
         {
-            this.LockFilePath = lockFilePath + "/.xft_.lock";   
+            this.LockFilePath = lockFilePath + prefix + ".lock";   
         }
 
         public bool IsLocked()
