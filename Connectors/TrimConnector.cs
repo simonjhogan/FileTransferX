@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using FileTransfer.Connectors;
 using TRIM.SDK;
-//using static System.Net.WebRequestMethods;
 
 namespace FileTransfer.Connectors
 {
