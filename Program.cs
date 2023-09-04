@@ -56,14 +56,14 @@ namespace FileTransfer
 
             var pathArgument= new Argument<string>(
                 name: "path",
-                description: "The directory to be processed.",
-                getDefaultValue: () => "c:/temp2"
+                description: "The directory to be processed."//,
+                //getDefaultValue: () => "c:/temp2"
                 );
 
             var queryArgument = new Argument<string>(
                 name: "query",
-                description: "Connection query string for the connector used.",
-                getDefaultValue: () => "WorkgroupServerName/Id/Container/ContainerType/RecordType"
+                description: "Connection query string for the connector used."//,
+                //getDefaultValue: () => "WorkgroupServerName/Id/Container/ContainerType/RecordType"
                 );
 
             rootCommand.Add(connectionArgument);
