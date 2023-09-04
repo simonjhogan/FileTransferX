@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using FileTransfer.Connectors;
 using TRIM.SDK;
-using static System.Net.WebRequestMethods;
+//using static System.Net.WebRequestMethods;
 
 namespace FileTransfer.Connectors
 {
