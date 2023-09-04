@@ -67,7 +67,6 @@ namespace FileTransfer.Connectors
                 if (database != null)
                 {
                     database.Dispose();
-
                 }
             }
         }
