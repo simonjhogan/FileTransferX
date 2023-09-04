@@ -113,7 +113,6 @@ namespace FileTransfer
         {
             Logging log = new();
             TaskLocker locker = new(configuration.FromPath, PREFIX);
-            //Encoder encoder = new Encoder();
             DirectoryService directoryService = new();
             int replayCounter = 0;
 
