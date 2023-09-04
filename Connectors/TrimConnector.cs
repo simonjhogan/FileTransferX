@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using FileTransfer.Connectors;
 using TRIM.SDK;
@@ -11,6 +12,7 @@ namespace FileTransfer.Connectors
 {
     internal class TrimConnector : Connector
     {
+        public String path = "";
         public String workgroupServerName = "";
         public String id = "";
         public String container = "";
@@ -20,6 +22,7 @@ namespace FileTransfer.Connectors
         private void setConnection(string toPath)
         {
             string[] args = toPath.Split("/");
+            this.path = toPath;
             this.workgroupServerName = args[0];
             this.id = args[1];
             this.container = args[2];
@@ -30,7 +33,7 @@ namespace FileTransfer.Connectors
         private bool createRecord(string fromPath)
         {
             // connection(toPath) = WorkgroupServerName/Id/Container/RecordType
-            log.WriteLine("Push:" + fromPath + " => " + this.Configuration.ToPath);
+            log.WriteLine("Push:" + fromPath + " => " + this.path);
 
             Database database = null;
 
