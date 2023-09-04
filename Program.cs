@@ -15,6 +15,12 @@ namespace FileTransfer
 {
     internal class Program
     {
+        const int DELAY = 5;
+        const int REPLAY = 2;
+        const bool RECURSE = false;
+        const int LOG_LEVEL = 1;
+        const string ACTION = "push";
+
         static async Task Main(string[] args)
         { 
             var rootCommand = new RootCommand("xft - Extreme File Transfer");
@@ -22,25 +28,25 @@ namespace FileTransfer
             var delayOption = new Option<int>(
                 name: "--delay",
                 description: "Delay between replay requests in seconds.",
-                getDefaultValue: () => 5);
+                getDefaultValue: () => DELAY);
                 rootCommand.AddGlobalOption(delayOption);
 
             var replayOption = new Option<int>(
                 name: "--replay",
                 description: "Number of replays to attempt.",
-                getDefaultValue: () => 3);
+                getDefaultValue: () => REPLAY);
                 rootCommand.AddGlobalOption(replayOption);
 
             var recurseOption = new Option<bool>(
                 name: "--recursive",
                 description: "Recursive directory processing.",
-                getDefaultValue: () => false);
+                getDefaultValue: () => RECURSE);
                 rootCommand.AddGlobalOption(recurseOption);
 
             var logLevelOption = new Option<int>(
                 name: "--logging",
                 description: "Logging level for the process.",
-                getDefaultValue: () => 1);
+                getDefaultValue: () => LOG_LEVEL);
                 rootCommand.AddGlobalOption(logLevelOption);
 
             var connectionArgument = new Argument<string>
@@ -52,7 +58,7 @@ namespace FileTransfer
             var actionArgument = new Argument<string>
                 (name: "action",
                 description: "The action to apply (push, move).",
-                getDefaultValue: () => "push");
+                getDefaultValue: () => ACTION);
 
             var pathArgument= new Argument<string>(
                 name: "path",
