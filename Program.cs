@@ -105,8 +105,7 @@ namespace FileTransfer
         static public void ProcessFiles(Configuration configuration)
         {
             Logging log = new Logging();
-            Terminal terminal = new Terminal();
-            TaskLocker locker = new TaskLocker(configuration.FromPath);
+            TaskLocker locker = new(configuration.FromPath);
             Encoder encoder = new Encoder();
             DirectoryService directoryService = new DirectoryService();
             int replayCounter = 0;
@@ -144,9 +143,6 @@ namespace FileTransfer
 
             connector.Configuration = configuration;
             connector.log = log;
-
-            if (configuration.Interactive)
-                terminal.WriteLine(configuration.ToString());
 
             FileInfo[] files = directoryService.List(configuration.FromPath, configuration.Query, configuration.Recurisve);
 

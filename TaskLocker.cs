@@ -12,7 +12,6 @@ namespace FileTransfer
     {
         public String LockFilePath { get; }
 
-        [Obsolete]
         public TaskLocker(String lockFilePath)
         {
             this.LockFilePath = lockFilePath + "/.xft_.lock";   
