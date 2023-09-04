@@ -80,7 +80,7 @@ namespace FileTransfer
             rootCommand.SetHandler((connectionArg, actionArg, pathArg, queryArg, delayOpt, replayOpt, recurseOpt, logOpt) =>
             {
            
-                Configuration configuration = new Configuration
+                Configuration configuration = new()
                 {
                     Command = connectionArg,
                     Action = actionArg,
@@ -110,10 +110,10 @@ namespace FileTransfer
 
         static public void ProcessFiles(Configuration configuration)
         {
-            Logging log = new Logging();
+            Logging log = new();
             TaskLocker locker = new(configuration.FromPath);
-            Encoder encoder = new Encoder();
-            DirectoryService directoryService = new DirectoryService();
+            //Encoder encoder = new Encoder();
+            DirectoryService directoryService = new();
             int replayCounter = 0;
 
             if (locker.IsLocked())
