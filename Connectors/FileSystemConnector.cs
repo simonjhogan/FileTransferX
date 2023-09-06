@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using FileTransfer.Connectors;
+//using System.Collections.Generic;
+//using System.Text;
+//using FileTransfer.Connectors;
 
 namespace FileTransfer.Connectors
 {

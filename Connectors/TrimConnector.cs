@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+//using System.Collections.Generic;
+//using System.Configuration;
+//using System.Linq;
+//using System.Text;
+//using FileTransfer.Connectors;
 using System.IO;
-using System.Linq;
-using System.Text;
-using FileTransfer.Connectors;
 using TRIM.SDK;
 
 namespace FileTransfer.Connectors
@@ -56,7 +56,7 @@ namespace FileTransfer.Connectors
                 record.Save();
 
                 // Check file transfer succesfful and delete or move "from" file to a deletion que
-
+                File.Delete(fromPath);
                 return true;
             }
             catch (Exception e)
